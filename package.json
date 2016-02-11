@@ -1,0 +1,38 @@
+{
+  "name": "regex-spell",
+  "version": "0.0.0",
+  "description": "A library to provide spell-checking support based on regular expressions.",
+  "license": "MIT",
+  "author": {
+    "name": "Dylan R. E. Moonfire",
+    "email": "d.moonfire@mfgames.com",
+    "url": "https://d.moonfire.us"
+  },
+  "keywords": [
+    "spell-check",
+    "spelling"
+  ],
+  "scripts": {
+    "lint": "tslint src/*.ts",
+    "pretest": "npm run build",
+    "test": "jasmine-node lib/spec/*-spec.js",
+    "prebuild": "npm run lint",
+    "build": "cd src && tsc && cd spec && tsc"
+  },
+  "homepage": "https://github.com/dmoonfire/regex-spell-js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmoonfire/regex-spell-js"
+  },
+  "bugs": {
+    "url": "https://github.com/dmoonfire/regex-spell-js/issues"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "tslint": "^3.0.0",
+    "typescript": "^1.6.2"
+  },
+  "dependencies": {
+  },
+  "main": "lib/init.js"
+}

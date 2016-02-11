@@ -1,5 +1,5 @@
 {
-  "name": "regex-spell",
+  "name": "regexp-spell",
   "version": "0.0.0",
   "description": "A library to provide spell-checking support based on regular expressions.",
   "license": "MIT",
@@ -19,13 +19,13 @@
     "prebuild": "npm run lint",
     "build": "cd src && tsc && cd spec && tsc"
   },
-  "homepage": "https://github.com/dmoonfire/regex-spell-js",
+  "homepage": "https://github.com/dmoonfire/regexp-spell-js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmoonfire/regex-spell-js"
+    "url": "https://github.com/dmoonfire/regexp-spell-js"
   },
   "bugs": {
-    "url": "https://github.com/dmoonfire/regex-spell-js/issues"
+    "url": "https://github.com/dmoonfire/regexp-spell-js/issues"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",

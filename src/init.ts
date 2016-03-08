@@ -25,12 +25,12 @@ export class RegExpSpell {
     */
     public getCorrectWords(input: string): Word[] {
         // If there are no known words, then we can just skip everything.
-        var ranges = new Array<Word>();
+        let ranges = new Array<Word>();
 
         if (this.knownWords.length === 0) { return ranges; }
 
         // Get the words in the input.
-        var words = this.getWords(input);
+        let words = this.getWords(input);
 
         // If there are no words in the input, then we won't have any input.
         if (words.length === 0) { return ranges; }
@@ -57,7 +57,7 @@ export class RegExpSpell {
     public getWords(input: string): Word[] {
         // If we have an empty string, then we have no ranges. We do this just
         // to avoid processing text if we don't have to.
-        var words = new Array<Word>();
+        let words = new Array<Word>();
 
         if (input == null || input === "" || /^\s*$/.test(input)) {
             return words;
@@ -66,15 +66,15 @@ export class RegExpSpell {
         // Otherwise, split the text on the words. We also grab the separators
         // (ensured in the set method) so we can just build up the various
         // indexes based on their length.
-        var parts = input.split(this.wordBoundaries);
-        var index = 0;
+        let parts = input.split(this.wordBoundaries);
+        let index = 0;
 
-        for (var part of parts) {
+        for (let part of parts) {
             // If we aren't matching a word boundary, then add it to the word
             // list. We check the length greater than zero to avoid the final
             // match if the string ends in a word boundary.
             if (part.length > 0 && !this.wordBoundaries.test(part)) {
-                var word = {
+                let word = {
                     start: index,
                     end: index + part.length,
                     word: part

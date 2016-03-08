@@ -1,4 +1,4 @@
-/// <reference path="../../typings/jasmine/jasmine.d.ts"/>
+/// <reference path="../../typings/main.d.ts"/>
 /// <reference path="../init.ts"/>
 import { RegExpSpell, Word } from "../init";
 

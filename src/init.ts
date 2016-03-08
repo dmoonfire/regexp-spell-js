@@ -15,8 +15,27 @@ export class RegExpSpell {
     private wordBoundaries: RegExp = /(\W+)/;
     private knownWords: RegExp[] = [];
 
-    constructor(knownWords?: RegExp[]) {
-        if (knownWords) { this.knownWords = knownWords; }
+    constructor(knownWords?: RegExp[]|string[]) {
+        // If we don't have known words, then just set it.
+        if (!knownWords) { return; }
+
+        // Build up a list of regex based on the elements.
+        let list: RegExp[] = [];
+
+        for (let item of knownWords) {
+            // Figure out what to do based on the type.
+            let isRegex = typeof item === "object";
+
+            if (isRegex) {
+                list.push(<RegExp>item);
+            } else {
+                let r = this.createRegex(<string>item);
+                list.push(r);
+            }
+        }
+
+        // Set the list since we're done.
+        this.knownWords = list;
     }
 
     /**
@@ -88,5 +107,12 @@ export class RegExpSpell {
 
         // Return the resulting non-boundary words.
         return words;
+    }
+
+    private createRegex(input: string): RegExp {
+        // Anchor the pattern to fit the entire string.
+        let pattern = `^${input}$`;
+        let r = new RegExp(pattern);
+        return r;
     }
 }

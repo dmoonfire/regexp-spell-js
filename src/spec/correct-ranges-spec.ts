@@ -64,7 +64,6 @@ describe("getCorrectWords with simple match", function() {
     });
 });
 
-
 describe("getCorrectWords with simple list", function() {
     it("single word returns none", function() {
         let spell = new RegExpSpell([/eat/, /like/, /store/]);
@@ -86,5 +85,35 @@ describe("getCorrectWords with simple list", function() {
         expect(words).toEqual([
             { start: 2, end: 6, word: "like" }
         ]);
+    });
+});
+
+describe("getCorrectWords with simple string list", function() {
+    it("single word returns none", function() {
+        let spell = new RegExpSpell(["eat", "like", "store"]);
+        var words = spell.getCorrectWords("I");
+        expect(words).toEqual([]);
+    });
+
+    it("triple word returns one", function() {
+        let spell = new RegExpSpell(["eat", "like", "store"]);
+        var words = spell.getCorrectWords("I like cheese.");
+        expect(words).toEqual([
+            { start: 2, end: 6, word: "like" }
+        ]);
+    });
+
+    it("triple with newline returns one", function() {
+        let spell = new RegExpSpell(["eat", "like", "store"]);
+        var words = spell.getCorrectWords("I\nlike\ncheese.");
+        expect(words).toEqual([
+            { start: 2, end: 6, word: "like" }
+        ]);
+    });
+
+    it("inner string returns none", function() {
+        let spell = new RegExpSpell(["eat", "like", "store"]);
+        var words = spell.getCorrectWords("dislike");
+        expect(words).toEqual([]);
     });
 });

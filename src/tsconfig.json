@@ -35,6 +35,7 @@
         "init.ts",
         "spec/correct-ranges-spec.ts",
         "spec/environment-spec.ts",
+        "spec/token-spec.ts",
         "spec/words-spec.ts"
     ],
     "atom": {

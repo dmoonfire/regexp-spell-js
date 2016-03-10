@@ -8,6 +8,56 @@ export interface Word {
 }
 
 /**
+* Defines the common functionality for the various spelling managers.
+*/
+export abstract class SpellingManager {
+}
+
+/**
+* A token-based spelling manager that uses non-processed list of words to provides
+* correctness testing and suggestions. This has both case-sensitive and -insensitive
+* methods along with suggestions that are capitalized based on the incorrect word.
+*/
+export class TokenSpellingManager extends SpellingManager {
+    public sensitive: any = {};
+    public insensitive: any = {};
+
+    /**
+    * Adds a word to the manager. If the word is in all lowercase, then it is added as
+    * a case insensitive word, otherwise it is added as a case sensitive result.
+    */
+    public add(token: string): void {
+        if (token && token.trim() !== "") {
+            // If we have at least one uppercase character, we are considered
+            // case sensitive. We don't test for lowercase because we want to
+            // ignore things like single quotes for posessives or contractions.
+            if (/[A-Z]/.test(token)) {
+                this.addCaseSensitive(token);
+            } else {
+                this.addCaseInsensitive(token);
+            }
+        }
+    }
+
+    public addCaseSensitive(token: string): void {
+        if (token && token.trim() !== "") {
+            this.sensitive[token] = true;
+        }
+    }
+    public addCaseInsensitive(token: string): void {
+        if (token && token.trim() !== "") {
+            this.insensitive[token] = true;
+        }
+    }
+
+    public check(token: string): boolean {
+        if (token in this.sensitive) return true;
+        if (token.toLowerCase() in this.insensitive) return true;
+        return false;
+    }
+}
+
+/**
 * Provides a regex-based spell-checker with the ablity to report both negative
 * (incorrect) and positive (correct) spellings.
 */
